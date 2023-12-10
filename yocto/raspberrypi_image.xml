@@ -16,5 +16,5 @@
 
   <project name="poky" path="src/poky" remote="poky-git" revision="refs/tags/yocto-4.0.13" />
   <project name="meta-rpi" path="src/meta-rpi" remote="github" revision="main" dest-branch="main" />
-  <project name="meta-openembedded" path="src/meta-openembedded" remote="openembedded-git" revision="refs/heads/8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4" />
+  <project name="meta-openembedded" path="src/meta-openembedded" remote="openembedded-git" revision="8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4" />
 </manifest>
