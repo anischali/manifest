@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="github"
+           fetch=".." 
+           review="git://git@github.com:anischali/" />
+  
+  <remote name="poky-git" 
+          fetch="https://git.yoctoproject.org/" 
+          review="https://www.yoctoproject.org/" />
+
+  <remote name="openembedded-git" 
+          fetch="https://git.openembedded.org/" 
+          review="" />
+
+  <default sync-j="8" />
+
+  <project name="poky" path="raspberry_pi/poky" remote="poky-git" revision="refs/tags/yocto-4.0.13" />
+  <project name="meta-rpi" path="raspberry_pi/meta-rpi" remote="github" revision="main" dest-branch="main" />
+  <project name="meta-openembedded" path="raspberry_pi/meta-openembedded" revision="refs/heads/8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4" />
+</manifest>
