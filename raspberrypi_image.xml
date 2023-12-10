@@ -1,1 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote  name="github"
+           fetch=".." 
+           review="git://git@github.com:anischali/" />
+  <remote name="buildroot-git" 
+          fetch="https://git.buildroot.net/" 
+          review="" />
 
+  <default sync-j="8" />
+
+  <project name="buildroot" path="buildroot" remote="github" revision="main" dest-branch="main" />
+  <project name="buildroot" path="buildroot/buildroot" remote="buildroot-git" revision="refs/tags/2023.11" />
+</manifest>
