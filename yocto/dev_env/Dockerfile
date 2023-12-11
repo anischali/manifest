@@ -1,28 +1,34 @@
 FROM oraclelinux:8
 
 
+# NEED TO FIND
+#  ccache  
+# perl-FindBin perl-File-Compare perl-File-Copy perl-locale
+#
+
+RUN dnf config-manager --add-repo https://yum.oracle.com/repo/OracleLinux/OL8/codeready/builder/developer/x86_64/
 RUN dnf update -y
 RUN dnf install -y gawk make wget tar bzip2 \
     gzip python3 unzip perl patch diffutils \
     diffstat git cpp gcc gcc-c++ glibc-devel \
-    texinfo chrpath ccache perl-Data-Dumper \
+    chrpath perl-Data-Dumper \
     perl-Text-ParseWords perl-Thread-Queue \
     perl-bignum socat python3-pexpect findutils \
-    which file cpio python python3-pip xz \
-    python3-GitPython python3-jinja2 SDL-devel \
-    rpcgen mesa-libGL-devel perl-FindBin \
-    perl-File-Compare perl-File-Copy perl-locale \
-    zstd lz4 hostname glibc-langpack-en libacl
+    which file cpio python3-pip xz python3-jinja2 \
+    SDL-devel mesa-libGL-devel zstd lz4 hostname \
+    glibc-langpack-en libacl
 
-RUN dnf install -y make python3-pip which bash-completion \
-    inkscape texlive-fncychap tmux bash
-
-RUN pip3 install sphinx sphinx_rtd_theme pyyaml
-
+RUN dnf install -y make which bash-completion \
+    inkscape texlive-fncychap tmux bash curl \
+    rpcgen texinfo
 
 COPY env.txt /.env
-
-RUN source /.env && groupadd --gid ${GROUP_ID} ${GROUP_NAME} \
+RUN cat /.env
+RUN source /.env && groupadd -f --gid ${GROUP_ID} ${GROUP_NAME} \
     && useradd --uid ${USER_ID} --gid ${GROUP_NAME} ${USER_NAME}
 
-CMD ["/bin/bash"]
+USER ${USER_NAME}
+RUN pip3 install --user sphinx sphinx_rtd_theme pyyaml \
+        distro jsonschema kconfiglib GitPython 
+
+ENTRYPOINT ["/bin/bash"]
