@@ -4,7 +4,7 @@
            fetch=".." 
            review="git://git@github.com:anischali/" />
   
-  <remote name="poky-git" 
+  <remote name="yocto-git" 
           fetch="https://git.yoctoproject.org/" 
           review="https://www.yoctoproject.org/" />
 
@@ -14,7 +14,8 @@
 
   <default sync-j="8" />
 
-  <project name="poky" path="src/poky" remote="poky-git" revision="refs/tags/yocto-4.0.13" />
+  <project name="poky" path="src/poky" remote="yocto-git" revision="refs/tags/yocto-4.0.13" />
   <project name="meta-rpi" path="src/meta-rpi" remote="github" revision="main" dest-branch="main" />
   <project name="meta-openembedded" path="src/meta-openembedded" remote="openembedded-git" revision="8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4" />
+  <project name="meta-raspberrypi" path="src/meta-raspberrypi" remote="yocto-git" revision="59a6a1b5dd1e21189adec49c61eae04ed3e70338" />
 </manifest>
