@@ -2,7 +2,7 @@ header:
   version: 11
 
 machine: qemux86-64
-target: meta-oe-image
+target: core-image-weston
 distro: poky
 
 repos:
@@ -24,7 +24,6 @@ repos:
       meta-networking:
       meta-oe:
       meta-python:
-      meta-gnome:
 
 bblayers_conf_header:
   standard: |
