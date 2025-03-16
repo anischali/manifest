@@ -1,0 +1,7 @@
+header:
+  version: 9
+  includes:
+    - kas-qemu-common.yml
+
+machine: qemux86-64
+distro: poky

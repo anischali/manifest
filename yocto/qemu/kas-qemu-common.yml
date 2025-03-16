@@ -1,0 +1,44 @@
+header:
+  version: 9
+
+machine: qemux86-64
+target: core-image-weston
+distro: poky
+
+repos:
+  poky:
+    url: "https://git.yoctoproject.org/poky"
+    refspec: "refs/tags/yocto-4.0.13"
+    path: "src/poky"
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp: 
+  
+  meta-openembedded:
+    url: "https://git.openembedded.org/meta-openembedded"
+    refspec: "8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4"
+    path: "src/meta-openembedded"
+    layers:
+      meta-multimedia:
+      meta-networking:
+      meta-oe:
+      meta-python:
+
+bblayers_conf_header:
+  standard: |
+    POKY_BBLAYERS_CONF_VERSION = "2"
+    BBPATH = "${TOPDIR}"
+    BBFILES ?= ""
+
+
+local_conf_header:
+  standard: |
+    CONF_VERSION = "2"
+    PACKAGE_CLASSES = "package_rpm"
+    SDKMACHINE = "x86_64"
+    USER_CLASSES = "buildstats"
+    PATCHRESOLVE = "noop"
+    BB_NUMBER_PARSE_THREADS = "16"
+    BB_NUMBER_THREADS = "16"
+    IMAGE_FSTYPES:append = " ext4"
