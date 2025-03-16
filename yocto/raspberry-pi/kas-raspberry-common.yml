@@ -1,11 +1,12 @@
 header:
-  version: 11
-
-machine: qemux86-64
-target: core-image-weston
-distro: poky
+  version: 9
 
 repos:
+  meta-rpi:
+    url: https://github.com/anischali/meta-rpi
+    refspec: "main"
+    path: "src/meta-rpi"
+
   poky:
     url: "https://git.yoctoproject.org/poky"
     refspec: "refs/tags/yocto-4.0.13"
@@ -25,6 +26,11 @@ repos:
       meta-oe:
       meta-python:
 
+  meta-raspberrypi:
+    url: "https://git.yoctoproject.org/meta-raspberrypi"
+    refspec: "59a6a1b5dd1e21189adec49c61eae04ed3e70338"
+    path: "src/meta-raspberrypi"
+
 bblayers_conf_header:
   standard: |
     POKY_BBLAYERS_CONF_VERSION = "2"
@@ -41,4 +47,4 @@ local_conf_header:
     PATCHRESOLVE = "noop"
     BB_NUMBER_PARSE_THREADS = "16"
     BB_NUMBER_THREADS = "16"
-    IMAGE_FSTYPES:append = " ext4"
+    IMAGE_FSTYPES:append = " wic.bz2 ext4"

@@ -1,56 +1,7 @@
 header:
-  version: 11
+  version: 9
+  includes:
+    - kas-raspberry-common.yml
 
 machine: raspberry-pi3b
-target: rpi-image
-distro: poky
-
-
-
-repos:
-  meta-rpi:
-    url: https://github.com/anischali/meta-rpi
-    refspec: "main"
-    path: "src/meta-rpi"
-
-  poky:
-    url: "https://git.yoctoproject.org/poky"
-    refspec: "refs/tags/yocto-4.0.13"
-    path: "src/poky"
-    layers:
-      meta:
-      meta-poky:
-      meta-yocto-bsp: 
-  
-  meta-openembedded:
-    url: "https://git.openembedded.org/meta-openembedded"
-    refspec: "8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4"
-    path: "src/meta-openembedded"
-    layers:
-      meta-multimedia:
-      meta-networking:
-      meta-oe:
-      meta-python:
-
-  meta-raspberrypi:
-    url: "https://git.yoctoproject.org/meta-raspberrypi"
-    refspec: "59a6a1b5dd1e21189adec49c61eae04ed3e70338"
-    path: "src/meta-raspberrypi"
-
-bblayers_conf_header:
-  standard: |
-    POKY_BBLAYERS_CONF_VERSION = "2"
-    BBPATH = "${TOPDIR}"
-    BBFILES ?= ""
-
-
-local_conf_header:
-  standard: |
-    CONF_VERSION = "2"
-    PACKAGE_CLASSES = "package_rpm"
-    SDKMACHINE = "x86_64"
-    USER_CLASSES = "buildstats"
-    PATCHRESOLVE = "noop"
-    BB_NUMBER_PARSE_THREADS = "16"
-    BB_NUMBER_THREADS = "16"
-    IMAGE_FSTYPES:append = " wic.bz2 ext4"
+distro: visibog
