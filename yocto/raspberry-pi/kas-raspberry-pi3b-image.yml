@@ -4,4 +4,4 @@ header:
     - kas-raspberry-common.yml
 
 machine: raspberry-pi3b
-distro: visibog
+distro: poky
