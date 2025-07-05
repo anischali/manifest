@@ -1,11 +1,15 @@
 #! /bin/bash
 
+readonly curr_dir="$(dirname ${0})"
+readonly local_yocto_home="${YOCTO_HOME:-$HOME/data/yocto}"
+
 function exec_docker() {
     args="$@"
     docker run \
         --user "$(id -u):$(id -g)" \
-        --mount "type=bind,source=/home/$(id -u -n),destination=/home/$(id -u -n)" \
-        -w "/home/$(id -u -n)" \
+        --mount "type=bind,source=${local_yocto_home},destination=${local_yocto_home},readonly=false" \
+        --mount "type=bind,source=${HOME}/.ssh,destination=${HOME}/.ssh,readonly=true" \
+        -w "${local_yocto_home}" \
         --net host \
         --rm \
         -it "$(id -u -n)/kas" /bin/bash -c ". $(pwd)/src/poky/oe-init-build-env && $args"
@@ -14,7 +18,7 @@ function exec_docker() {
 
 function setup() {
 
-    docker build . -t "$(id -u -n)/kas" \
+    docker build ${curr_dir} -t "$(id -u -n)/kas" \
             --build-arg  "USER_NAME=$(id -u -n)" \
             --build-arg  "GROUP_NAME=$(id -g -n)" \
             --build-arg  "GROUP_ID=$(id -g)" \
@@ -26,14 +30,13 @@ function run() {
 
     docker run \
         --user "$(id -u):$(id -g)" \
-        --mount "type=bind,source=/home/$(id -u -n),destination=/home/$(id -u -n)" \
-        -w "/home/$(id -u -n)" \
+        --mount "type=bind,source=${local_yocto_home},destination=${local_yocto_home},readonly=false" \
+        --mount "type=bind,source=${HOME}/.ssh,destination=${HOME}/.ssh,readonly=true" \
+        -w "${local_yocto_home}" \
         --net host \
         --rm \
         -it "$(id -u -n)/kas"
 }
-
-
 
 if [ -z "$(docker images -q "$(id -u -n)/kas" 2> /dev/null)" ]; then
     setup
